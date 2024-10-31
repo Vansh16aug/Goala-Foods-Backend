@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
     res.status(400).json({ error: "Invalid token." });
   }
 };
+
 router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -51,7 +52,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -66,14 +66,14 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: user._id, username: user.username }, // Include username in token
+      { userId: user._id, username: user.username },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
     res.json({
       token,
-      user: { id: user._id, email: user.email, username: user.username }, // Return username
+      user: { id: user._id, email: user.email, username: user.username },
     });
   } catch (error) {
     console.error("Login error:", error);
@@ -89,6 +89,17 @@ router.get("/protected", verifyToken, (req, res) => {
 // Health check route
 router.get("/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
+});
+
+// New route to check login status
+router.get("/status", verifyToken, (req, res) => {
+  res.json({
+    isLoggedIn: true,
+    user: {
+      userId: req.user.userId,
+      username: req.user.username,
+    },
+  });
 });
 
 module.exports = router;
