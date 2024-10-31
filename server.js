@@ -10,7 +10,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: "*",
+  origin: "https://goala-foods-4nslqz4w3-vansh16augs-projects.vercel.app",
   credentials: true,
   optionsSuccessStatus: 200,
 };
