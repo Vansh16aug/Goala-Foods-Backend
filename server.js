@@ -10,7 +10,17 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: "https://goala-foods-4nslqz4w3-vansh16augs-projects.vercel.app",
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://goala-foods-4nslqz4w3-vansh16augs-projects.vercel.app",
+    ];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200,
 };
