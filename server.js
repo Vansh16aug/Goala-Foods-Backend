@@ -14,6 +14,7 @@ const corsOptions = {
     const allowedOrigins = [
       "http://localhost:3000",
       "https://goala-foods-4nslqz4w3-vansh16augs-projects.vercel.app",
+      "https://goala-foods.vercel.app/",
     ];
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
