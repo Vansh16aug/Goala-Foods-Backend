@@ -26,6 +26,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+
+
 app.use(cors(corsOptions)); // Use CORS with the specified options
 app.use(express.json());
 
